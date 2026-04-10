@@ -12,11 +12,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
 
     <style>
-        /* Estilo específico para a seção de consulta para garantir que combine com seu site */
+        /* Estilo da seção de consulta */
         #consulta-reparo {
             background-color: #f8f9fa;
             padding: 50px 20px;
             text-align: center;
+            display: none; /* Escondido por padrão */
         }
         .consulta-container {
             width: 100%;
@@ -47,7 +48,6 @@
         <nav>
             <ul>
                 <li><a href="#servicos">Serviços</a></li>
-                <li><a href="#consulta-reparo">Consultar OS</a></li>
                 <li><a href="#galeria">Portfólio</a></li>
                 <li><a href="#sobre">Sobre Nós</a></li>
                 <li><a href="#redes">Redes Sociais</a></li>
@@ -66,29 +66,29 @@
         </section>
 
         <section id="consulta-reparo">
-    <div class="container">
-        <h2 class="consulta-titulo"><i class="fas fa-microchip"></i> Acompanhe sua Manutenção</h2>
-        <p>Insira o código da etiqueta colada em seu aparelho para ver o relatório.</p>
-        
-        <div class="consulta-container" style="position: relative; min-height: 400px; overflow: hidden;">
-            
-            <div id="loading-miratech" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1;">
-                <i class="fas fa-sync fa-spin" style="font-size: 40px; color: #007bff;"></i>
-                <p style="font-family: 'Oswald', sans-serif; margin-top: 15px; letter-spacing: 1px;">CARREGANDO SISTEMA...</p>
+            <div class="container">
+                <h2 class="consulta-titulo"><i class="fas fa-microchip"></i> Acompanhe sua Manutenção</h2>
+                <p>Insira o código da etiqueta colada em seu aparelho para ver o relatório.</p>
+                
+                <div class="consulta-container" style="position: relative; min-height: 400px; overflow: hidden;">
+                    
+                    <div id="loading-miratech" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1;">
+                        <i class="fas fa-sync fa-spin" style="font-size: 40px; color: #007bff;"></i>
+                        <p style="font-family: 'Oswald', sans-serif; margin-top: 15px; letter-spacing: 1px;">CARREGANDO SISTEMA...</p>
+                    </div>
+
+                    <iframe 
+                      src="https://script.google.com/macros/s/AKfycbzHdZTJUE9h48bPEIBcFoncjLyoNrmwclWs9SV8HtDbU9RTNhQ-C7pJTy1JaYJCFAk/exec" 
+                      width="100%" 
+                      height="750px" 
+                      frameborder="0" 
+                      style="border: none; border-radius: 15px; position: relative; z-index: 2; background: transparent;"
+                      onload="document.getElementById('loading-miratech').style.display='none';">
+                    </iframe>
+
+                </div>
             </div>
-
-            <iframe 
-              src="https://script.google.com/macros/s/AKfycbzHdZTJUE9h48bPEIBcFoncjLyoNrmwclWs9SV8HtDbU9RTNhQ-C7pJTy1JaYJCFAk/exec" 
-              width="100%" 
-              height="750px" 
-              frameborder="0" 
-              style="border: none; border-radius: 15px; position: relative; z-index: 2; background: transparent;"
-              onload="document.getElementById('loading-miratech').style.display='none';">
-            </iframe>
-
-        </div>
-    </div>
-</section>
+        </section>
 
         <section id="servicos" class="container">
             <h2>Nossos Serviços</h2>
@@ -155,6 +155,16 @@
         <p>&copy; Miratech 2025. Todos os direitos reservados.</p>
     </footer>
 
-</body>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('acesso') === 'cliente') {
+            document.getElementById('consulta-reparo').style.display = 'block';
+            // Scroll suave até a seção de consulta
+            setTimeout(() => {
+                document.getElementById('consulta-reparo').scrollIntoView({ behavior: 'smooth' });
+            }, 500);
+        }
+    </script>
 
+</body>
 </html>
