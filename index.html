@@ -12,12 +12,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
 
     <style>
-        /* Estilo da seção de consulta */
+        /* A seção começa totalmente escondida e sem ocupar espaço */
         #consulta-reparo {
             background-color: #f8f9fa;
             padding: 50px 20px;
             text-align: center;
-            display: none; /* COMEÇA ESCONDIDO */
+            display: none; 
         }
         .consulta-container {
             width: 100%;
@@ -48,7 +48,6 @@
         <nav>
             <ul>
                 <li><a href="#servicos">Serviços</a></li>
-                <li><a href="#consulta-reparo" onclick="mostrarConsulta()">Consultar OS</a></li>
                 <li><a href="#galeria">Portfólio</a></li>
                 <li><a href="#sobre">Sobre Nós</a></li>
                 <li><a href="#redes">Redes Sociais</a></li>
@@ -157,25 +156,24 @@
     </footer>
 
     <script>
-        function mostrarConsulta() {
-            document.getElementById('consulta-reparo').style.display = 'block';
-        }
-
-        // Esta função verifica se o cliente abriu o site com #consulta-reparo no link
-        function verificarLink() {
+        function verificarAcessoPeloLink() {
+            // Se o link contiver #consulta-reparo (que está no seu QR Code impresso)
             if (window.location.hash === '#consulta-reparo') {
-                mostrarConsulta();
-                // Pequeno atraso para o scroll funcionar após a seção aparecer
+                const secao = document.getElementById('consulta-reparo');
+                secao.style.display = 'block'; // Torna a seção visível
+                
+                // Rola a página até a consulta de forma suave
                 setTimeout(() => {
-                    document.getElementById('consulta-reparo').scrollIntoView({ behavior: 'smooth' });
-                }, 100);
+                    secao.scrollIntoView({ behavior: 'smooth' });
+                }, 200);
             }
         }
 
-        // Roda a verificação assim que a página carrega
-        window.onload = verificarLink;
-        // Roda a verificação se o cliente clicar no menu sem recarregar a página
-        window.onhashchange = verificarLink;
+        // Executa assim que abrir o site
+        window.addEventListener('load', verificarAcessoPeloLink);
+        
+        // Executa caso o link mude sem atualizar a página
+        window.addEventListener('hashchange', verificarAcessoPeloLink);
     </script>
 
 </body>
