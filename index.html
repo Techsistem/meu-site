@@ -17,7 +17,7 @@
             background-color: #f8f9fa;
             padding: 50px 20px;
             text-align: center;
-            display: none; /* Escondido por padrão */
+            display: none; /* COMEÇA ESCONDIDO */
         }
         .consulta-container {
             width: 100%;
@@ -48,6 +48,7 @@
         <nav>
             <ul>
                 <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#consulta-reparo" onclick="mostrarConsulta()">Consultar OS</a></li>
                 <li><a href="#galeria">Portfólio</a></li>
                 <li><a href="#sobre">Sobre Nós</a></li>
                 <li><a href="#redes">Redes Sociais</a></li>
@@ -152,18 +153,29 @@
     </main>
 
     <footer>
-        <p>&copy; Miratech 2025. Todos os direitos reservados.</p>
+        <p>&copy; Miratech 2026. Todos os direitos reservados.</p>
     </footer>
 
     <script>
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('acesso') === 'cliente') {
+        function mostrarConsulta() {
             document.getElementById('consulta-reparo').style.display = 'block';
-            // Scroll suave até a seção de consulta
-            setTimeout(() => {
-                document.getElementById('consulta-reparo').scrollIntoView({ behavior: 'smooth' });
-            }, 500);
         }
+
+        // Esta função verifica se o cliente abriu o site com #consulta-reparo no link
+        function verificarLink() {
+            if (window.location.hash === '#consulta-reparo') {
+                mostrarConsulta();
+                // Pequeno atraso para o scroll funcionar após a seção aparecer
+                setTimeout(() => {
+                    document.getElementById('consulta-reparo').scrollIntoView({ behavior: 'smooth' });
+                }, 100);
+            }
+        }
+
+        // Roda a verificação assim que a página carrega
+        window.onload = verificarLink;
+        // Roda a verificação se o cliente clicar no menu sem recarregar a página
+        window.onhashchange = verificarLink;
     </script>
 
 </body>
