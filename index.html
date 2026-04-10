@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&display=swap" rel="stylesheet">
 
     <style>
-        /* A seção começa totalmente escondida e sem ocupar espaço */
+        /* A seção começa totalmente escondida para garantir privacidade e velocidade */
         #consulta-reparo {
             background-color: #f8f9fa;
             padding: 50px 20px;
@@ -78,6 +78,7 @@
                     </div>
 
                     <iframe 
+                      id="iframe-miratech"
                       src="https://script.google.com/macros/s/AKfycbzHdZTJUE9h48bPEIBcFoncjLyoNrmwclWs9SV8HtDbU9RTNhQ-C7pJTy1JaYJCFAk/exec" 
                       width="100%" 
                       height="750px" 
@@ -143,38 +144,4 @@
                    <i class="fab fa-whatsapp"></i> WhatsApp
                 </a>
                 
-                <a href="https://instagram.com/_miratech" 
-                   target="_blank" class="btn-contato instagram">
-                   <i class="fab fa-instagram"></i> Instagram
-                </a>
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>&copy; Miratech 2026. Todos os direitos reservados.</p>
-    </footer>
-
-    <script>
-        function verificarAcessoPeloLink() {
-            // Se o link contiver #consulta-reparo (que está no seu QR Code impresso)
-            if (window.location.hash === '#consulta-reparo') {
-                const secao = document.getElementById('consulta-reparo');
-                secao.style.display = 'block'; // Torna a seção visível
-                
-                // Rola a página até a consulta de forma suave
-                setTimeout(() => {
-                    secao.scrollIntoView({ behavior: 'smooth' });
-                }, 200);
-            }
-        }
-
-        // Executa assim que abrir o site
-        window.addEventListener('load', verificarAcessoPeloLink);
-        
-        // Executa caso o link mude sem atualizar a página
-        window.addEventListener('hashchange', verificarAcessoPeloLink);
-    </script>
-
-</body>
-</html>
+                <a href="https://
