@@ -118,24 +118,45 @@
     </footer>
 
     <script>
-        function verificarAcesso() {
-            const params = new URLSearchParams(window.location.search);
-            const os = params.get('os');
-            const hash = window.location.hash;
-            const secao = document.getElementById('consulta-reparo');
-            const iframe = document.getElementById('iframe-miratech');
-            const linkBase = "https://script.google.com/macros/s/AKfycbzHdZTJUE9h48bPEIBcFoncjLyoNrmwclWs9SV8HtDbU9RTNhQ-C7pJTy1JaYJCFAk/exec";
+    function verificarAcesso() {
+        // 1. Pega o ?os= (o que o automático usa)
+        const urlParams = new URLSearchParams(window.location.search);
+        const osDoLink = urlParams.get('os'); 
+        
+        // 2. Pega o # (o que o manual usa)
+        const hash = window.location.hash;
+        
+        const secao = document.getElementById('consulta-reparo');
+        const iframe = document.getElementById('iframe-miratech');
+        
+        // Coloque o link do seu Google Script aqui:
+        const linkGoogle = "https://script.google.com/macros/s/AKfycbzHdZTJUE9h48bPEIBcFoncjLyoNrmwclWs9SV8HtDbU9RTNhQ-C7pJTy1JaYJCFAk/exec";
 
-            if (os || hash === '#consulta-reparo') {
-                secao.style.display = 'block';
-                if (os) {
-                    iframe.src = linkBase + "?os=" + os;
-                }
-                setTimeout(() => { secao.scrollIntoView({ behavior: 'smooth' }); }, 500);
+        // REGRA: Se houver a OS no link OU se o link tiver #consulta-reparo, abra!
+        if (osDoLink || hash.includes('consulta-reparo')) {
+            console.log("Sistema de consulta ativado!");
+            
+            // Força a seção a aparecer
+            secao.style.display = 'block';
+
+            // Se for o automático (?os=), ele atualiza o iframe com o número
+            if (osDoLink) {
+                iframe.src = linkGoogle + "?os=" + osDoLink;
             }
+
+            // Faz o scroll suave até a área de consulta
+            setTimeout(() => {
+                secao.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 500);
         }
-        window.onload = verificarAcesso;
-        window.onhashchange = verificarAcesso;
-    </script>
+    }
+
+    // Tenta rodar assim que o script é lido
+    verificarAcesso();
+    // Tenta rodar quando a página carregar tudo
+    window.addEventListener('load', verificarAcesso);
+    // Tenta rodar se o usuário clicar no menu (âncora)
+    window.addEventListener('hashchange', verificarAcesso);
+</script>
 </body>
 </html>
