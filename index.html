@@ -20,21 +20,24 @@
             text-align: center;
             display: none; /* Só aparece com o QR Code ou link direto */
         }
-        .consulta-container {
-            width: 100%;
-            max-width: 550px;
-            margin: 0 auto;
-            background: #fff;
-            padding: 15px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        #iframe-miratech {
-            width: 100%;
-            height: 700px;
-            border: none;
-            border-radius: 15px;
-        }
+       .consulta-container {
+        width: 100%;
+        max-width: 550px;
+        margin: 0 auto;
+        background: #fff;
+        padding: 0; /* Removi o padding para o iframe encostar no topo */
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        overflow: hidden; /* Garante que o que sair pra fora suma */
+        position: relative;
+    }
+
+    #iframe-miratech {
+        width: 100%;
+        height: 600px; /* Ajuste a altura conforme necessário */
+        border: none;
+        margin-top: -80px; /* TRUQUE: Joga o topo do iframe (a busca) para cima, para fora da visão */
+    }
     </style>
 </head>
 <body>
